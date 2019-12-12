@@ -5,7 +5,7 @@ function resolve (dir) {
   return path.join(__dirname, '.', dir)
 }
 
-const BUNDLE_VERSION = '0.1.3'
+const BUNDLE_VERSION = '0.1.4'
 
 module.exports = (env, argv) => {
   config = {
@@ -13,7 +13,7 @@ module.exports = (env, argv) => {
     'essay-utils' : './src/main.js'
     },
     output: {
-      path: path.resolve(__dirname, './lib'),
+      path: path.resolve(__dirname, '../lib'),
       publicPath: '/lib/',
       filename: argv.mode === 'production' ? `[name]-${BUNDLE_VERSION}.min.js` : "[name].js"
     },
