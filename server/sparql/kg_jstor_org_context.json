@@ -1,0 +1,706 @@
+{
+    "wd": "http://kg.jstor.org/entity/",
+    "wdt": "http://kg.jstor.org/prop/direct/",
+    "wds": "http://kg.jstor.org/entity/statement/",
+    "wdtn": "http://kg.jstor.org/prop/direct-normalized/",
+    "wdv": "http://kg.jstor.org/value/",
+    "p": "http://kg.jstor.org/prop/",
+    "pq": "http://kg.jstor.org/prop/qualifier/",
+    "ps": "http://kg.jstor.org/prop/statement/",
+
+    "prov": "http://www.w3.org/ns/prov#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "schema": "http://schema.org/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "wikibase": "http://wikiba.se/ontology#",
+
+    "id": "@id",
+
+    "entity": "wd:Q13", 
+    "book": "wd:Q127", 
+    "herbal": "wd:Q213",
+    "human": "wd:Q92",
+    "mention": "wd:Q5738",
+    "person": "wd:Q288",
+    "plant": "wd:Q481",
+
+    "AAT ID": {
+        "@id": "wdt:P73"
+    },
+    "alias": {
+        "@container": "@set",
+        "@id": "skos:altLabel",
+        "@language": "en"
+    },
+    "African Plant Database ID": {
+        "@id": "wdt:P708"
+    },
+    "APA ID": {
+        "@id": "wdt:P767"
+    },
+    "APNI ID": {
+        "@id": "wdt:P572"
+    },
+    "ARKive ID": {
+        "@id": "wdt:P714"
+    },
+    "Atlas of Florida Plants ID": {
+        "@id": "wdt:P766"
+    },
+    "ATRF ID": {
+        "@id": "wdt:P720"
+    },
+    "author": {
+        "@container": "@set",
+        "@id": "wdt:P118",
+        "@type": "@id"
+    },
+    "author name string": {
+        "@container": "@set",
+        "@id": "wdt:P264"
+    },
+    "Australasian Pollen and Spore Atlas Code": {
+        "@id": "wdt:P713"
+    },
+    "BabelNet ID": {
+        "@id": "wdt:P29"
+    },
+    "BAV ID": {
+        "@id": "wdt:P953"
+    },
+    "BGCI garden ID": {
+        "@id": "wdt:P846"
+    },
+    "BHCL ID": {
+        "@id": "wdt:P981"
+    },
+    "BHL bibliography ID": {
+        "@id": "wdt:P838"
+    },
+    "BHL creator ID": {
+        "@id": "wdt:P306"
+    },
+    "Biblioteca Nacional de España ID": {
+        "@id": "wdt:P1214"
+    },
+    "Bibliothèque nationale de France ID": {
+        "@id": "wdt:P1148"
+    },
+    "BIBSYS ID": {
+        "@id": "wdt:P960"
+    },
+    "BIU Santé person ID": {
+        "@id": "wdt:P978"
+    },
+    "BNCF Thesaurus ID": {
+        "@id": "wdt:P160"
+    },
+    "BNE ID": {
+        "@id": "wdt:P958"
+    },
+    "BVLarramendi ID": {
+        "@id": "wdt:P957"
+    },
+    "BanQ author ID": {
+        "@id": "wdt:P974"
+    },
+    "Belgian Species List ID": {
+        "@id": "wdt:P1095"
+    },
+    "Benezit ID": {
+        "@id": "wdt:P970"
+    },
+    "Biografisch Portaal number": {
+        "@id": "wdt:P980"
+    },
+    "BioLib ID": {
+        "@id": "wdt:P576"
+    },
+    "BnF ID": {
+        "@id": "wdt:P810"
+    },
+    "botanist author abbreviation": {
+        "@id": "wdt:P845"
+    },
+    "Canadian Encyclopedia article ID": {
+        "@id": "wdt:P373"
+    },
+    "CANTIC ID": {
+        "@id": "wdt:P962"
+    },
+    "CERL ID": {
+        "@id": "wdt:P941"
+    },
+    "CONOR ID": {
+        "@id": "wdt:P963"
+    },
+    "Commons category": {
+        "@id": "wdt:P31"
+    },
+    "Commons gallery": {
+        "@id": "wdt:P188"
+    },
+    "coordinate location": {
+        "@id": "wdt:P387"
+    },
+    "copyright status": {
+        "@container": "@set",
+        "@id": "wdt:P1070"
+    },
+    "country": {
+        "@id": "wdt:P399"
+    },
+    "country of citizenship": {
+        "@container": "@set",
+        "@id": "wdt:P289",
+        "@type": "@id"
+    },
+    "date of birth": {
+        "@container": "@set",
+        "@id": "wdt:P344",
+        "@type": "xsd:dateTime"
+    },
+    "date modified": {
+        "@id": "schema:dateModified",
+        "@type": "xsd:dateTime"
+    },
+    "date of death": {
+        "@container": "@set",
+        "@id": "wdt:P345",
+        "@type": "xsd:dateTime"
+    },
+    "DBNL author ID": {
+        "@id": "wdt:P982"
+    },
+    "described at URL": {
+        "@id": "wdt:P4",
+        "@type": "@id"
+    },
+    "described by source": {
+        "@id": "wdt:P36",
+        "@type": "@id"
+    },
+    "description": {
+        "@id": "schema:description",
+        "@language": "en"
+    },
+    "Dictionary of Spanish Biography ID": {
+        "@id": "wdt:P956"
+    },
+    "DOI": {
+        "@id": "wdt:P662"
+    },
+    "duration": {
+        "@id": "wdt:P439",
+        "@type": "xsd:decimal"
+    },
+    "Dyntaxa ID": {
+        "@id": "wdt:P565"
+    },
+    "eBiodiversity ID": {
+        "@id": "wdt:P776"
+    },
+    "edition or translation of": {
+        "@container": "@set",
+        "@id": "wdt:P170",
+        "@type": "@id"
+    },
+    "educated at": {
+        "@container": "@set",
+        "@id": "wdt:P500",
+        "@type": "@id"
+    },
+    "employer": {
+        "@container": "@set",
+        "@id": "wdt:P313",
+        "@type": "@id"
+    },
+    "ECARTICO person ID": {
+        "@id": "wdt:P972"
+    },
+    "Ecocrop ID": {
+        "@id": "wdt:P748"
+    },
+    "Elhuyar ZTH ID": {
+        "@id": "wdt:P42"
+    },
+    "EMLO person ID": {
+        "@id": "wdt:P967"
+    },
+    "Enciclopedia Italiana ID": {
+        "@id": "wdt:P977"
+    },
+    "Encyclopedia of Life ID": {
+        "@id": "wdt:P575"
+    },
+    "Encyclopædia Britannica Online ID": {
+        "@id": "wdt:P63"
+    },
+    "Entomologists of the World ID": {
+        "@id": "wdt:P931"
+    },
+    "EPPO Code": {
+        "@id": "wdt:P568"
+    },
+    "external data available at": {
+        "@container": "@set",
+        "@id": "wdt:P43",
+        "@type": "@id"
+    },
+    "FAST ID": {
+        "@id": "wdt:P927"
+    },
+    "FEIS ID": {
+        "@id": "wdt:P1089"
+    },
+    "FloraBase ID": {
+        "@id": "wdt:P715"
+    },
+    "Flora of Australia ID (new)": {
+        "@id": "wdt:P775"
+    },
+    "Flora of China ID": {
+        "@id": "wdt:P696"
+    },
+    "Flora of North America taxon ID": {
+        "@id": "wdt:P693"
+    },
+    "Flora of Wisconsin ID": {
+        "@id": "wdt:P762"
+    },
+    "field of work": {
+        "@container": "@set",
+        "@id": "wdt:P591",
+        "@type": "@id"
+    },
+    "FOIH taxon ID": {
+        "@id": "wdt:P746"
+    },
+    "Fossilworks ID": {
+        "@id": "wdt:P577"
+    },
+    "Freebase ID": {
+        "@id": "wdt:P24"
+    },
+    "full work available at": {
+        "@container": "@set",
+        "@id": "wdt:P134",
+        "@type": "@id"
+    },
+    "given name": {
+        "@container": "@set",
+        "@id": "wdt:P352",
+        "@type": "@id"
+    },
+    "GND ID": {
+        "@id": "wdt:P11"
+    },
+    "GRIN URL": {
+        "@id": "wdt:P692"
+    },
+    "Geni.com profile ID": {
+        "@id": "wdt:P969"
+    },
+    "Global Biodiversity Information Facility ID": {
+        "@id": "wdt:P578"
+    },
+    "Global Species ID": {
+        "@id": "wdt:P1090"
+    },
+    "Gran Enciclopèdia Catalana ID": {
+        "@id": "wdt:P6"
+    },
+    "Great Russian Encyclopedia Online ID": {
+        "@id": "wdt:P16"
+    },
+    "Harvard Index of Botanists ID": {
+        "@id": "wdt:P831"
+    },
+    "has fruit type": {
+        "@id": "wdt:P668"
+    },
+    "has mention": {
+        "@id": "wdt:P1082",
+        "@type": "@id"
+    },
+    "has part": {
+        "@id": "wdt:P35"
+    },
+    "has type specimen": {
+        "@id": "wdt:P1142"
+    },
+    "historic name": {
+        "@id": "wdt:P1081"
+    },
+    "iNaturalist taxon ID": {
+        "@id": "wdt:P569"
+    },
+    "image": {
+        "@container": "@set",
+        "@id": "wdt:P65",
+        "@type": "@id"
+    },
+    "image URL": {
+        "@container": "@set",
+        "@id": "wdt:P1467",
+        "@type": "@id"
+    },
+    "IRMNG ID": {
+        "@id": "wdt:P749"
+    },
+    "inception": {
+        "@id": "wdt:P145"
+    },
+    "instance of": {
+        "@id": "wdt:P17",
+        "@type": "@id"
+    },
+    "Invasive Species Compendium Datasheet ID": {
+        "@id": "wdt:P571"
+    },
+    "IPNI author ID": {
+        "@id": "wdt:P346"
+    },
+    "IPNI plant ID": {
+        "@id": "wdt:P689"
+    },
+    "ISNI": {
+        "@id": "wdt:P909"
+    },
+    "Internet Archive ID": {
+        "@id": "wdt:P1071"
+    },
+    "ITIS TSN": {
+        "@id": "wdt:P574"
+    },
+    "IUCN taxon ID": {
+        "@id": "wdt:P645"
+    },
+    "IUCN conservation status": {
+        "@id": "wdt:P647"
+    },
+    "Kaiserhof ID": {
+        "@id": "wdt:P968"
+    },
+    "label": {
+        "@id": "rdfs:label",
+        "@language": "en"
+    },
+    "language of work or name": {
+        "@id": "wdt:P112",
+        "@type": "@id"
+    },
+    "languages spoken, written or signed": {
+        "@container": "@set",
+        "@id": "wdt:P318",
+        "@type": "@id"
+    },
+    "Leidse Hoogleraren ID": {
+        "@id": "wdt:P971"
+    },
+    "Libraries Australia ID": {
+        "@id": "wdt:P947"
+    },
+    "Library of Congress authority ID": {
+        "@id": "wdt:P174"
+    },
+    "Libris-URI": {
+        "@id": "wdt:P950"
+    },
+    "located in the administrative territorial entity": {
+        "@id": "wdt:P397"
+    },
+    "main subject": {
+        "@id": "wdt:P133",
+        "@type": "@id"
+    },
+    "mentions": {
+        "@id": "wdt:P1437"
+    },
+    "MeSH descriptor ID": {
+        "@id": "wdt:P169"
+    },
+    "Michigan Flora ID": {
+        "@id": "wdt:P763"
+    },
+    "name in native language": {
+        "@id": "wdt:P322"
+    },
+    "National Diet Library Auth ID": {
+        "@id": "wdt:P1144"
+    },
+    "National Library of Australia ID": {
+        "@id": "wdt:P1443"
+    },
+    "National Library of Israel identifier": {
+        "@id": "wdt:P1172"
+    },
+    "National Portrait Gallery (London) person ID": {
+        "@id": "wdt:P912"
+    },
+    "NBN System Key": {
+        "@id": "wdt:P726"
+    },
+    "NCBI Taxonomy ID": {
+        "@id": "wdt:P684"
+    },
+    "Nederlands Soortenregister ID": {
+        "@id": "wdt:P727"
+    },
+    "NDL Auth ID": {
+        "@id": "wdt:P206"
+    },
+    "NE.se ID": {
+        "@id": "wdt:P18"
+    },
+    "New Zealand Organisms Register ID": {
+        "@id": "wdt:P566"
+    },
+    "NKCR AUT ID": {
+        "@id": "wdt:P951"
+    },
+    "NLA ID": {
+        "@id": "wdt:P964"
+    },
+    "NLI ID": {
+        "@id": "wdt:P353"
+    },
+    "notable work": {
+        "@container": "@set",
+        "@id": "wdt:P127",
+        "@type": "@id"
+    },
+    "NSK ID": {
+        "@id": "wdt:P965"
+    },
+    "NTA ID": {
+        "@id": "wdt:P910"
+    },
+    "NUKAT ID": {
+        "@id": "wdt:P961"
+    },
+    "number of pages": {
+        "@id": "wdt:P162",
+        "@type": "xsd:decimal"
+    },
+    "occupation": {
+        "@container": "@set",
+        "@id": "wdt:P312",
+        "@type": "@id"
+    },
+    "OCLC control number": {
+        "@id": "wdt:P1069"
+    },
+    "Open Food Facts food category ID": {
+        "@id": "wdt:P703"
+    },
+    "Open Library ID": {
+        "@id": "wdt:P920"
+    },
+    "openMLOL author ID": {
+        "@id": "wdt:P955"
+    },
+    "page(s)": {
+        "@id": "wdt:P180"
+    },
+    "parent taxon": {
+        "@id": "wdt:P556",
+        "@type": "@id"
+    },
+    "part of": {
+        "@id": "wdt:P30",
+        "@type": "@id"
+    },
+    "PfaF ID": {
+        "@id": "wdt:P736"
+    },
+    "place of birth": {
+        "@id": "wdt:P325",
+        "@type": "@id"
+    },
+    "place of burial": {
+        "@id": "wdt:P314",
+        "@type": "@id"
+    },
+    "place of death": {
+        "@id": "wdt:P326",
+        "@type": "@id"
+    },
+    "place of publication": {
+        "@id": "wdt:P167",
+        "@type": "@id"
+    },
+    "Plant Finder ID": {
+        "@id": "wdt:P757"
+    },
+    "PlantList-ID": {
+        "@id": "wdt:P690"
+    },
+    "Plants of the World online ID": {
+        "@id": "wdt:P688"
+    },
+    "Portuguese National Library ID": {
+        "@id": "wdt:P1193"
+    },
+    "position held": {
+        "@container": "@set",
+        "@id": "wdt:P865",
+        "@type": "@id"
+    },
+    "PTBNP ID": {
+        "@id": "wdt:P959"
+    },
+    "printed by": {
+        "@id": "wdt:P218",
+        "@type": "@id"
+    },
+    "publication date": {
+        "@container": "@set",
+        "@id": "wdt:P22",
+        "@type": "xsd:dateTime"
+    },
+    "publisher": {
+        "@container": "@set",
+        "@id": "wdt:P164",
+        "@type": "@id"
+    },
+    "Quora topic ID": {
+        "@id": "wdt:P19"
+    },
+    "RERO ID": {
+        "@id": "wdt:P973"
+    },
+    "RKDartists ID": {
+        "@id": "wdt:P979"
+    },
+    "SBN author ID": {
+        "@id": "wdt:P975"
+    },
+    "SELIBR ID": {
+        "@id": "wdt:P952"
+    },
+    "SHARE Catalogue author ID": {
+        "@id": "wdt:P976"
+    },
+    "SNAC Ark ID": {
+        "@id": "wdt:P944"
+    },
+    "SUDOC authorities ID": {
+        "@id": "wdt:P811"
+    },
+    "sex or gender": {
+        "@id": "wdt:P28"
+    },
+    "start time offset": {
+        "@id": "wdt:P1414",
+        "@type": "xsd:decimal"
+    },
+    "student of": {
+        "@container": "@set",
+        "@id": "wdt:P895",
+        "@type": "@id"
+    },
+    "subject has role": {
+        "@id": "wdt:P593",
+        "@type": "@id"
+    },
+    "Stuttgart Database of Scientific Illustrators ID": {
+        "@id": "wdt:P943"
+    },
+    "subtitle": {
+        "@id": "wdt:P92",
+        "@language": "en"
+    },
+    "taxon common name": {
+        "@id": "wdt:P502",
+        "@language": "en"
+    },
+    "taxon name": {
+        "@id": "wdt:P501"
+    },
+    "taxon range map image": {
+        "@id": "wdt:P560"
+    },
+    "taxon rank": {
+        "@id": "wdt:P555",
+        "@type": "@id"
+    },
+    "taxon synonym": {
+        "@id": "wdt:P1092",
+        "@type": "@id"
+    },
+    "taxonomic type": {
+        "@id": "wdt:P557",
+        "@type": "@id"
+    },
+    "TAXREF ID": {
+        "@id": "wdt:P725"
+    },
+    "transcript": {
+        "@id": "wdt:P1415"
+    },
+    "Tela Botanica ID": {
+        "@id": "wdt:P717"
+    },
+    "this taxon is source of ": {
+        "@id": "wdt:P667"
+    },
+    "title": {
+        "@id": "wdt:P88",
+        "@language": "en"
+    },
+    "topic's main category": {
+        "@id": "wdt:P34",
+        "@type": "@id"
+    },
+    "Treccani ID": {
+        "@id": "wdt:P570"
+    },
+    "TripAdvisor ID": {
+        "@id": "wdt:P1202"
+    },
+    "Tropicos ID": {
+        "@id": "wdt:P686"
+    },
+    "uBio ID": {
+        "@id": "wdt:P747"
+    },
+    "UNII": {
+        "@id": "wdt:P1091"
+    },
+    "URL": {
+        "@id": "wdt:P48",
+        "@type": "@id"
+    },
+    "University of Barcelona authority ID": {
+        "@id": "wdt:P966"
+    },
+    "USDA PLANTS ID": {
+        "@id": "wdt:P700"
+    },
+    "VASCAN ID": {
+        "@id": "wdt:P694"
+    },
+    "Verspreidingsatlas.nl ID": {
+        "@id": "wdt:P1105"
+    },
+    "VIAF ID": {
+        "@id": "wdt:P151"
+    },
+    "VicFlora ID": {
+        "@id": "wdt:P718"
+    },
+    "Watson & Dallwitz family ID": {
+        "@id": "wdt:P731"
+    },
+    "WCSPF ID": {
+        "@id": "wdt:P699"
+    },
+    "WoRMS-ID for taxa": {
+        "@id": "wdt:P579"
+    },
+    "YouTube video link": {
+        "@id": "wdt:P1435"
+    }
+}
