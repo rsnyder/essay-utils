@@ -501,8 +501,8 @@ def add_vue_app(arg):
 
     for url in [
         'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js',
-        #'https://ithaka.github.io/labs-wikibase/lib/essay-utils-0.1.1.min.js'
-        'http://localhost:8081/js/index.js'
+        'https://raw.githubusercontent.com/rsnyder/essay-utils/master/lib/essay-utils-0.1.4.min.js'
+        #'http://localhost:8081/js/index.js'
         ]:
         lib = soup.new_tag('script')
         lib.attrs['src'] = url
