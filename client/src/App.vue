@@ -9,6 +9,7 @@ import Vue from 'vue'
 import entityInfobox from './components/EntityInfobox'
 // import entityInfobox from './components/EntityPopover'
 import Map from './components/Map'
+import { get_entity } from './api'
 
 // Initialize with default components
 const components = {
@@ -29,6 +30,7 @@ export default {
   name: 'app',
   components,
   mounted() {
+    get_entity('wd:Q457191').then(entity => console.log(entity))
     this.$nextTick(() =>  this.init())
   },
   methods: {

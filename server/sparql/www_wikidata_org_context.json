@@ -14,21 +14,27 @@
     "skos": "http://www.w3.org/2004/02/skos/core#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "wikibase": "http://wikiba.se/ontology#",
+    "opengis": "http://www.opengis.net/ont/geosparql#",
 
     "id": "@id",
 
     "entity": "wd:Q35120", 
 
-    "alias": {
+    "aliases": {
         "@container": "@set",
         "@id": "skos:altLabel",
         "@language": "en"
+    },
+    "coords": {
+        "@container": "@set",
+        "@id": "wdt:P625",
+        "@type": "opengis:wktLiteral"
     },
     "description": {
         "@id": "schema:description",
         "@language": "en"
     },
-    "image": {
+    "images": {
         "@container": "@set",
         "@id": "wdt:P18",
         "@type": "@id"
@@ -41,7 +47,7 @@
         "@id": "rdfs:label",
         "@language": "en"
     },
-    "wikipedia_page": {
+    "wikipedia page": {
         "@id": "schema:isPartOf",
         "@type": "@id"
       }

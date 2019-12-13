@@ -28,7 +28,7 @@
     "AAT ID": {
         "@id": "wdt:P73"
     },
-    "alias": {
+    "aliases": {
         "@container": "@set",
         "@id": "skos:altLabel",
         "@language": "en"
@@ -141,7 +141,8 @@
     "Commons gallery": {
         "@id": "wdt:P188"
     },
-    "coordinate location": {
+    "coords": {
+        "@container": "@set",
         "@id": "wdt:P387"
     },
     "copyright status": {
@@ -336,7 +337,7 @@
     "iNaturalist taxon ID": {
         "@id": "wdt:P569"
     },
-    "image": {
+    "images": {
         "@container": "@set",
         "@id": "wdt:P65",
         "@type": "@id"

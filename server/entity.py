@@ -143,7 +143,7 @@ class KnowledgeGraph(object):
 
     def _link_values(self, d, **kwargs):
         def to_url(k, v):
-            formatters = self._formatter_urls(k, ns=kwargs.get('ns', self.ns), language=kwargs.get('language', 'en')) if k not in ('id', 'label', 'type', 'description', 'date modified') else None                
+            formatters = self._formatter_urls(k, ns=kwargs.get('ns', self.ns), language=kwargs.get('language', 'en')) if k not in ('id', 'label', 'type', 'description', 'date modified', 'coordinate location') else None                
             if formatters:
                 if isinstance(v, list):
                     v = [{'value': val, 'url': f.replace('$1', val)} for f in formatters for val in v]
@@ -246,6 +246,7 @@ class KnowledgeGraph(object):
     def _label(self, eid, language=None):
         language = language if language else self.language
         ns, eid = eid.split(':') if ':' in eid else (self.ns, eid)
+        url = f'{WB_SERVICE_ENDPOINT}/label/{ns}:{eid}?language={language}'
         label = requests.get(f'{WB_SERVICE_ENDPOINT}/label/{ns}:{eid}?language={language}').text
         logger.debug(f'_label: eid={eid} ns={ns} label="{label}"')
         return label
@@ -290,6 +291,12 @@ class KnowledgeGraph(object):
             merged['type'] = merged.pop('@type')
         if 'described at URL' in merged:
             del merged['described at URL']
+        if 'coords' in merged:
+            coords = []
+            for cs in merged['coords']:
+                coords.append([float(c) for c in cs.replace('Point(','').replace(')','').split()])
+            merged['coords'] = coords
+
         return merged
 
     def _add_summary_text(self, entity):

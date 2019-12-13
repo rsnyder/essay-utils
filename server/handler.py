@@ -8,6 +8,11 @@ import os
 from entity import KnowledgeGraph
 from essay_utils import EssayUtils, Essay, mw_to_html5, add_vue_app
 
+cors_headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': True
+}
+
 def _lambda_args(event, body_key=None, multiValue_qargs=False, normalize_keys=True):
     args = event['multiValueQueryStringParameters'] if multiValue_qargs else event['queryStringParameters']
     if args is None:
@@ -32,7 +37,7 @@ def get_entity(event, context):
     qid = event['pathParameters'].get('qid')
     logger.info('get_entity: qid=%s args=%s', qid, args)
     entity = KnowledgeGraph(**args).entity(qid, **args)
-    return {'statusCode': 200, 'body': json.dumps(entity)}
+    return {'statusCode': 200, 'headers': cors_headers, 'body': json.dumps(entity)}
 
 def get_essay(event, context):
     args = _lambda_args(event)
@@ -44,4 +49,6 @@ def get_essay(event, context):
     essay = Essay(**page_data)
     essay = add_vue_app(essay.html)
     logger.error(essay)
-    return {'statusCode': 200, 'headers': {'Content-Type': 'text/html'}, 'body': essay}
+    headers = {'Content-Type': 'text/html'}
+    headers.update(cors_headers)
+    return {'statusCode': 200, 'headers': headers, 'body': essay}

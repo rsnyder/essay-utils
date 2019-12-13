@@ -51,6 +51,7 @@ functions:
     - http:
         path: entity/{qid}
         method: get
+        cors: true
 
   get-essay:
     # memorySize: 1536 #512 default, 3008 is the max-- this also scales processor resources.
@@ -61,3 +62,4 @@ functions:
     - http:
         path: essay/{title}
         method: get
+        cors: true
