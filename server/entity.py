@@ -300,9 +300,9 @@ class KnowledgeGraph(object):
         return merged
 
     def _add_summary_text(self, entity):
-        if 'wikipedia_page' in entity:
-            resp = requests.get(f'https://en.wikipedia.org/api/rest_v1/page/summary/{entity["wikipedia_page"].split("/")[-1]}')
-            entity['wikipedia_summary'] = resp.json()
+        if 'wikipedia page' in entity:
+            resp = requests.get(f'https://en.wikipedia.org/api/rest_v1/page/summary/{entity["wikipedia page"].split("/")[-1]}')
+            entity['wikipedia summary'] = resp.json()
         return entity
 
 def as_html(entity):
