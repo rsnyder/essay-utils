@@ -5,7 +5,7 @@ function resolve (dir) {
   return path.join(__dirname, '.', dir)
 }
 
-const BUNDLE_VERSION = '0.1.4'
+const BUNDLE_VERSION = '0.1.5'
 
 module.exports = (env, argv) => {
   config = {

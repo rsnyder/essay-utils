@@ -28,7 +28,7 @@ from bs4 import BeautifulSoup
 from bs4.element import Comment, NavigableString, Tag
 
 from diskcache import Cache
-cache = Cache(BASE_DIR)
+cache = Cache(BASE_DIR) if BASE_DIR != '/var/task' else Cache()
 
 import requests
 logging.getLogger('requests').setLevel(logging.INFO)
@@ -40,7 +40,7 @@ SPARQL_DIR = os.path.join(BASE_DIR, 'sparql')
 
 WB_SERVICE_ENDPOINT = 'https://lo7kh865s6.execute-api.us-east-1.amazonaws.com/prod'
 
-DEFAULT_SITE = 'labs-wiki.jstor.org'
+DEFAULT_SITE = 'kg.jstor.org'
 
 DEFAULT_STYLESHEET = '''
     .toc {
@@ -220,13 +220,12 @@ class Essay(object):
 
     def __init__(self, html, **kwargs):
         self._soup = BeautifulSoup(html, 'html5lib')
-        logger.info(self._soup)
         self.entities = self._find_entities()
         self.custom_components = self._find_custom_components()
         self._update_entities()
         self._tag_entities()
         self.maps = self._find_maps()
-        self._add_stylesheet(**kwargs)
+        #self._add_stylesheet(**kwargs)
         self._add_data()
 
     def _parent_section_id(self, elem, default=None):
@@ -255,10 +254,8 @@ class Essay(object):
                         de.attrs['class'] = 'entity'
                     else:
                         entity.apply_to.add(parent_section_id)
-                    logger.info(entity)
                 if not de.text:
                     de.decompose()
-        logger.info(entities)
         return entities
 
     def _update_entities(self):
@@ -328,7 +325,6 @@ class Essay(object):
 
         to_match = {}
         for entity in self.entities.values():
-            logger.info(entity)
             to_match[entity.label.lower()] = entity
             if entity.aliases:
                 for alias in entity.aliases:
@@ -501,7 +497,7 @@ def add_vue_app(arg):
 
     for url in [
         'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js',
-        'https://raw.githubusercontent.com/rsnyder/essay-utils/master/lib/essay-utils-0.1.4.min.js'
+        'https://rsnyder.github.io/essay-utils/essay-utils-0.1.5.min.js'
         #'http://localhost:8081/js/index.js'
         ]:
         lib = soup.new_tag('script')

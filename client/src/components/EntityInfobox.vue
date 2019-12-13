@@ -1,10 +1,9 @@
 <template>
   <div>
-    <span data-qid="Q123" color="primary" text @click="setSetSelectedEntity">Set entity</span>
     <v-dialog v-model="isOpen" width="500">
       <v-card>
         <v-card-title class="headline grey lighten-2" primary-title>
-          Default: {{ entity.label }}
+          {{ entity.label }}
         </v-card-title>
         <v-card-text>
           {{ entity.description }}
@@ -20,7 +19,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'entity-infobox',

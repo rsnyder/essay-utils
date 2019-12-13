@@ -27,3 +27,6 @@ __py_cache__
 *.db
 *.db-*
 *.swp
+
+.serverless
+server/config

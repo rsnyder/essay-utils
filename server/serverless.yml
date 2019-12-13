@@ -1,0 +1,63 @@
+service: essay-utils
+
+plugins:
+  - serverless-python-requirements
+  - serverless-prune-plugin
+custom:
+    useDownloadCache: true
+    useStaticCache: true
+    prune:
+      automatic: true
+      number: 3
+      includeLayers: true
+
+provider:
+  name: aws
+  runtime: python3.7
+  region: us-east-1
+  stage: prod
+  stackTags: # Optional CF stack tags
+    "sequoia:app": ${self:service}
+    "sequoia:basedomain": cirrostratus.org
+    "sequoia:user": LabsTeam@ithaka
+    "sequoia:environment": ${opt:stage,self:provider.stage}
+  environment:
+    SERVERLESS_REGION: ${opt:region,self:provider.region}
+    SERVERLESS_STAGE: ${opt:stage,self:provider.stage}
+    SGK_ENVIRONMENT: ${opt:stage,self:provider.stage}
+
+  timeout: 30
+  vpc:
+    # sequoia VPC
+    VpcId: vpc-de490eba
+    securityGroupIds:
+      # stage-dependent VPC default security group
+      ${file(config/${opt:stage,self:provider.stage}/vpc.js):security}
+
+    subnetIds:
+      # stage-dependent private subnets
+      ${file(config/${opt:stage,self:provider.stage}/vpc.js):subnets}
+
+  deploymentBucket: sequoia-short-lived
+
+functions:
+
+  get-entity:
+    # memorySize: 1536 #512 default, 3008 is the max-- this also scales processor resources.
+    description: "Get entity"
+    role: arn:aws:iam::594813696195:role/lambda_exec_role_labs
+    handler: handler.get_entity
+    events:
+    - http:
+        path: entity/{qid}
+        method: get
+
+  get-essay:
+    # memorySize: 1536 #512 default, 3008 is the max-- this also scales processor resources.
+    description: "Get essay"
+    role: arn:aws:iam::594813696195:role/lambda_exec_role_labs
+    handler: handler.get_essay
+    events:
+    - http:
+        path: essay/{title}
+        method: get

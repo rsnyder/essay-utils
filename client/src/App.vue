@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <!-- <lmap/> -->
     <entity-infobox/>
   </v-app>
 </template>
@@ -14,8 +13,7 @@ import Map from './components/Map'
 // Initialize with default components
 const components = {
   // entityInfobox: entityPopover,
-  entityInfobox: entityInfobox,
-  lmap: Map
+  entityInfobox: entityInfobox
 }
 
 // Override defaults with custom components
@@ -50,7 +48,7 @@ export default {
             height: figure.attributes.height ? figure.attributes.height.value : '400px'
           }
           const MapCtor = Vue.extend(Map)
-          new MapCtor({ propsData, store: this.$store }).$mount(figure)
+          const mnt = new MapCtor({ propsData, store: this.$store }).$mount(figure)
         }
       })
     },
@@ -68,5 +66,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: none;
 }
 </style>

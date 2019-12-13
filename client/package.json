@@ -1,6 +1,6 @@
 {
   "name": "essay-utils",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --mode development --hot --port 8081 --output-public-path js --output-filename index.js",

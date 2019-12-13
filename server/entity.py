@@ -18,7 +18,7 @@ import concurrent.futures
 from copy import deepcopy
 
 from diskcache import Cache
-cache = Cache(BASE_DIR)
+cache = Cache(BASE_DIR) if BASE_DIR != '/var/task' else Cache()
 
 import requests
 logging.getLogger('requests').setLevel(logging.INFO)
@@ -64,6 +64,7 @@ class KnowledgeGraph(object):
 
     @cache.memoize()
     def entity(self, qid, language=None, entity_type=None):
+        logger.info(f'entity: qid={qid} language={language} entity_type={entity_type}')
         language = language if language else self.language
         entity_type = entity_type if entity_type else self.entity_type
         ns, qid = qid.split(':') if ':' in qid else (self.ns, qid)
@@ -74,24 +75,38 @@ class KnowledgeGraph(object):
         with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
             by_qid = {}
             futures = {}
-            for qid in (secondary, primary):
+            for qid in [_qid for _qid in (secondary, primary) if _qid]:
                 futures[executor.submit(self._entity, qid, language, entity_type)] = qid
 
             for future in concurrent.futures.as_completed(futures):
                 if future.result():
                     by_qid[futures[future]] = future.result()
         
-        return self._merge(by_qid[primary], by_qid[secondary])
+        entity = self._merge(by_qid.get(primary), by_qid.get(secondary))
+        entity['language'] = language
+        self._add_summary_text(entity)
+        return entity
 
     @cache.memoize()
     def _entity(self, qid, language='en', entity_type='entity'):
         ns, qid = qid.split(':') if ':' in qid else (self.ns, qid)
-        sparql = f'CONSTRUCT {{wd:{qid} a wd:{GRAPHS[ns]["types"][entity_type]} . wd:{qid} ?p ?o}} WHERE {{wd:{qid} ?p ?o}}'
+        sparql = '''
+        CONSTRUCT {
+            wd:%s a "%s" .
+            wd:%s ?p ?o .
+             wd:%s schema:isPartOf ?wikipedia_page .
+        } WHERE {
+            wd:%s ?p ?o .
+            OPTIONAL {
+                ?wikipedia_page schema:about wd:%s .
+                FILTER(STRSTARTS(STR(?wikipedia_page), 'https://%s.wikipedia.org'))
+            }
+        }''' % (qid, entity_type, qid, qid, qid, qid, language)
         context = self._get_context(ns, language)
         _jsonld = self._do_jsonld_sparql_query(sparql, context, GRAPHS[ns]['sparql_endpoint'])
         # post process returned jsonld
         for func in (self._frame, self._filter_props, self._link_values, self._add_id_labels):
-            _jsonld = func(_jsonld, context=context, entity_type=entity_type, ns=ns, **kwargs)
+            _jsonld = func(_jsonld, context=context, entity_type=entity_type, ns=ns)
         return _jsonld
     
     '''
@@ -107,6 +122,8 @@ class KnowledgeGraph(object):
         }
         for prop in [p for p in context if p not in CONTEXT_EXCLUDE_IN_FRAME]:
             _frame[prop] = {}
+        # print(json.dumps(_jsonld))
+        # print(json.dumps(_frame))
         framed = jsonld.frame(_jsonld, frame=_frame)
         return framed['@graph'][0] if '@graph' in framed and framed['@graph'] else {}
 
@@ -185,11 +202,14 @@ class KnowledgeGraph(object):
     def _eid_from_label(self, label, ns=None, language=None):
         ns = ns if ns else self.ns
         language = language if language else self.language
-        eid = requests.post(
-            f'{WB_SERVICE_ENDPOINT}/find',
-            json = {'ns': ns, 'text': label, 'type': 'property'}
-        ).json()['id']
-        logger.debug('eid_from_label: ns=%s label="%s" eid=%s', ns, label, eid)
+        try:
+            eid = requests.post(
+                f'{WB_SERVICE_ENDPOINT}/find',
+                json = {'ns': ns, 'text': label, 'type': 'property', 'language': language}
+            ).json()['id']
+        except:
+            eid = None
+        logger.debug(f'eid_from_label: ns={ns} text="{label}" language={language} eid={eid}')
         return eid
 
     @cache.memoize()
@@ -250,24 +270,33 @@ class KnowledgeGraph(object):
         secondary_qid = resp['results']['bindings'][0]['qid']['value'].split('/')[-1] if resp['results']['bindings'] else None
         return f'{secondary_ns}:{secondary_qid}' if secondary_qid else None
 
-    def _merge(self, primary, secondary):
+    def _merge(self, primary, secondary=None):
         def _norm(v):
             return set([json.dumps(d, sort_keys=True) for d in v]) if isinstance(v, list) else json.dumps(v, sort_keys=True)
 
         merged = deepcopy(primary)
-        for k, v in secondary.items():
-            if k in merged:
-                if isinstance(merged[k], list):
-                    mv = _norm(merged[k])
-                    for sv in v:
-                        if not _norm(sv) in mv:
-                            merged[k].append(sv)
-            else:
-                merged[k] = deepcopy(v)
-        merged['id']['alt'] = secondary['id']['id'] 
+        if secondary:
+            for k, v in secondary.items():
+                if k in merged:
+                    if isinstance(merged[k], list):
+                        mv = _norm(merged[k])
+                        for sv in v:
+                            if not _norm(sv) in mv:
+                                merged[k].append(sv)
+                else:
+                    merged[k] = deepcopy(v)
+            merged['id']['alt'] = secondary['id']['id']
+        if '@type' in merged:
+            merged['type'] = merged.pop('@type')
         if 'described at URL' in merged:
             del merged['described at URL']
         return merged
+
+    def _add_summary_text(self, entity):
+        if 'wikipedia_page' in entity:
+            resp = requests.get(f'https://en.wikipedia.org/api/rest_v1/page/summary/{entity["wikipedia_page"].split("/")[-1]}')
+            entity['wikipedia_summary'] = resp.json()
+        return entity
 
 def as_html(entity):
     return open('viewer.html', 'r').read().replace("'{{DATA}}'", json.dumps(entity))

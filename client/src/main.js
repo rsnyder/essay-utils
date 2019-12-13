@@ -4,6 +4,7 @@ import VTooltip from 'v-tooltip'
 import httpVueLoader from 'http-vue-loader'
 import App from './App.vue'
 import store from './store'
+import '../assets/styles/main.css'
 
 const vueAppElem = document.createElement('div')
 vueAppElem.id = 'app'

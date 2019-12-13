@@ -40,5 +40,9 @@
     "label": {
         "@id": "rdfs:label",
         "@language": "en"
-    }
-}
+    },
+    "wikipedia_page": {
+        "@id": "schema:isPartOf",
+        "@type": "@id"
+      }
+  }
