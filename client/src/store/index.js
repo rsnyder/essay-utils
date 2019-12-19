@@ -7,26 +7,44 @@ export default new Vuex.Store({
   state: {
     entities: {},
     maps: {},
-    selectedEntity: null,
-    selectedMap: null,
+    selectedEntityQID: null,
+    selectedMapID: null,
+    documentSections: [],
+    activeSections: [],
+    selectedSection: null
   },
   mutations: {
     setEntities (state, entities) { state.entities = entities },
+    setEntity (state, entity) {
+      const entities = { ...state.entities }
+      entities[entity.qid] = entity
+      state.entities = entities
+    },
     setMaps (state, maps) { state.maps = maps },
-    setSelectedEntity (state, selected) { state.selectedEntity = selected },
-    setSelectedMap (state, selected) { state.selectedMap = selected }
+    setSelectedEntityQID (state, qid) { state.selectedEntityQID = qid },
+    setSelectedMapID (state, mapid) { state.setSelectedMapID = mapid },
+    setDocumentSections (state, sections) { state.documentSections = sections },
+    setActiveSections (state, sections) { state.activeSections = sections },
+    setSelectedSection (state, sectionId) { state.selectedEntityQID = sectionId },
   },
   actions: {
     setEntities: ({ commit }, entities) => commit('setEntities', entities),
+    setEntity: ({ commit }, entity) => commit('setEntity', entity),
     setMaps: ({ commit }, maps) => commit('setMaps', maps),
-    setSelectedEntity: ({ commit }, selected) => commit('setSelectedEntity', selected),
-    setSelectedMap: ({ commit }, selected) => commit('setSelectedMap', selected)
+    setSelectedEntityQID: ({ commit }, qid) => commit('setSelectedEntityQID', qid),
+    setSelectedMapID: ({ commit }, mapid) => commit('setSelectedMapID', mapid),
+    setDocumentSections: ({ commit }, sections) => commit('setDocumentSections', sections),
+    setActiveSections: ({ commit }, sections) => commit('setActiveSections', sections),
+    setSelectedSection: ({ commit }, sectionId) => commit('setSelectedSection', sectionId)
   },
   getters: {
     entities: state => state.entities,
     maps: state => state.maps,
-    selectedEntity: state => state.selectedEntity,
-    selectedMap: state => state.selectedMap
+    selectedEntityQID: state => state.selectedEntityQID,
+    selectedMapID: state => state.selectedMapID,
+    documentSections: state => state.documentSections,
+    activeSections: state => state.activeSections,
+    selectedSection: state => state.selectedSection
   },
   modules: {
   }

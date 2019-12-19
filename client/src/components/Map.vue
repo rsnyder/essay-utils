@@ -49,14 +49,20 @@ export default {
         entities() { return this.$store.state.entities },
         locations() { return Object.values(this.entities).filter(entity => entity.coords) }
     },
+    created() {
+      console.log('map.created')
+    },
     mounted() {
-        console.log(`map.mounted: mapid=${this.mapid} center=${this.props} zoom=${this.zoom} width=${this.width} height=${this.height}`)
-        console.log(this)
+        console.log(`map.mounted: mapid=${this.mapid} center=${this.center} zoom=${this.zoom} width=${this.width} height=${this.height}`)
         this.initMap()
         this.initLayers()
     },
+    destroyed() {
+      console.log('map.destroyed')
+    },
     methods: {
         initMap() {
+            console.log('initMap')
             this.map = this.$L.map('map').setView(this.center, this.zoom)
             this.tileLayer = this.$L.tileLayer(
                 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
@@ -120,6 +126,7 @@ export default {
     .lmap {
         height: 400px;
         width: 400px;
+        z-index: 1;
     }
 
 </style>

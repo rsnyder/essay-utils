@@ -299,6 +299,7 @@ class Essay(object):
 
     def _add_data(self):
         data = self._soup.new_tag('script')
+        data.attrs["type"] = "application/ld+json"
         data.append('\nwindow.data = ' + json.dumps({
             'entities': dict([(qid, entity.json()) for qid, entity in self.entities.items()]),
             'maps': dict([(mapid, _map.json()) for mapid, _map in self.maps.items()]),
@@ -334,16 +335,18 @@ class Essay(object):
             context = self._section_ids_for_elem(e)
             snorm = e.string.lower()
             matches = []
-            for tm in to_match:
+            for tm in sorted(to_match.keys(), key=len, reverse=True):
                 try:
                     for m in [m.start() for m in re.finditer(tm, snorm)]:
                         start = m
                         end = start + len(tm)
+                        logger.info(f'{tm} "{to_match[tm].label}" start={start} end={end} apply_to={to_match[tm].apply_to}')
                         overlaps = False
                         for match in matches:
                             mstart = match['idx']
                             mend = mstart + len(match['matched'])
                             if (start >= mstart and start <= mend) or (end >= mstart and end <= mend):
+                                # logger.info(f'{tm} overlaps with {match["matched"]} {match["idx"]}')
                                 overlaps = True
                                 break
                         if not overlaps:
@@ -372,6 +375,7 @@ class Essay(object):
                         replaced.append(seg)
                         cursor = m
 
+                    # logger.info(f'{rec["matched"]} {entity.apply_to} {context} {entity.apply_to.intersection(context)}')
                     if entity.apply_to.intersection(context):
                         # make tag for matched item
                         seg = self._soup.new_tag('span')
@@ -497,8 +501,8 @@ def add_vue_app(arg):
 
     for url in [
         'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js',
-        'https://rsnyder.github.io/essay-utils/essay-utils-0.1.6.min.js'
-        #'http://localhost:8081/js/index.js'
+        #'https://rsnyder.github.io/essay-utils/essay-utils-0.1.6.min.js'
+        'http://localhost:8081/js/index.js'
         ]:
         lib = soup.new_tag('script')
         lib.attrs['src'] = url

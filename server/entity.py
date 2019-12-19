@@ -18,6 +18,7 @@ import concurrent.futures
 from copy import deepcopy
 
 from diskcache import Cache
+logger.error(f'BASE_DIR={BASE_DIR}')
 cache = Cache(BASE_DIR) if BASE_DIR != '/var/task' else Cache()
 
 import requests
